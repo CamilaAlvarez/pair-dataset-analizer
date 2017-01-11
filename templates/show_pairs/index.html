@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block header %}
+    <form method="POST" action="{% url 'next-pair-page' next_page=current_page  %}">
+        {% csrf_token %}
+        {{ filter_form }}
+    </form>
 
-</body>
-</html>
+{% endblock header%}
+
+{% block body %}
+    <div class="container-fluid">
+    {% for pair in pairs %}
+        {% if forloop.counter0|divisibleby:col_number %}
+            <div class="row">
+        {% endif %}
+        {% if pair.img_is_pair %}
+            <div class="col-sm-6 col-md-3 pair is-pair">
+        {% else %}
+            <div class="col-sm-6 col-md-3 pair is-not-pair">
+        {% endif %}
+                <div class="row">
+                    <div class="col-sm-6 image-container"><img src="{{ pair.img_catalog_image }}"></div>
+                    <div class="col-sm-6 image-container"><img src="{{ pair.img_outdoor_image }}"></div>
+                </div>
+            </div>
+        {% if forloop.counter|divisibleby:col_number %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% if not pairs|length|divisibleby:col_number %}
+        </div>
+    {% endif %}
+    </div>
+{% endblock body %}
+
+
+{% block footer %}
+    <ul class="pagination">
+        {% for i in page_range %}
+            {% if i == current_page|add:"0" %}
+                <li class="active">
+                <a href="#">{{ i }}</a>
+            {% else %}
+                <li>
+                <a href="{% url 'next-pair-page' next_page=i %}">{{ i }}</a>
+            {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock footer %}
+
+{% block scripts %}
+    <link type="text/css" property='stylesheet' href="{% static 'show_pairs/css/style.css'%}" rel="stylesheet">
+{% endblock scripts %}
