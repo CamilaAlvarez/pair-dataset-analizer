@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'qs8&+ni*w4lo@7j*1@c1rm5so+#5!64)+tsnst%p$1bvz(i1sz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.90']
 
 
 # Application definition
@@ -76,10 +76,12 @@ WSGI_APPLICATION = 'dataset_pair_analizer.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+	'default':{'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'datasetAnalizer',
+		'USER':'labelingassistant',
+		'PASSWORD': 'PASS-99a050c0-d3ce-44e4-a581-6a7c4b609a08',
+		'HOST': 'localhost',
+		'PORT': '',}
 }
 
 
@@ -119,6 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/dataset-analizer/static/'
 MEDIA_ROOT = '/Users/calvarez/Downloads/'
 MEDIA_URL = '/media/'
+STATIC_ROOT = '/home/calvarez/git/pair-dataset-analizer/collected-static/'

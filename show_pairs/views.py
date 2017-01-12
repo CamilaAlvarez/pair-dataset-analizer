@@ -13,7 +13,7 @@ def get_paged_pairs(request, next_page):
         next_page = int(next_page)
     if 'filter' in request.POST:
         filter = request.POST['filter']
-        request.session['filer'] = filter
+        request.session['filter'] = filter
         filter_form.initial = {'filter':filter}
         if request.POST['filter'] != '-1':
             page_content = ImagePairs.objects.filter(img_is_pair=filter)
