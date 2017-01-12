@@ -37,7 +37,37 @@
 
 {% block footer %}
     <ul class="pagination">
-        {% for i in page_range %}
+        {% for i in start_range %}
+            {% if i == current_page|add:"0" %}
+                <li class="active">
+                <a href="#">{{ i }}</a>
+            {% else %}
+                <li>
+                <a href="{% url 'next-pair-page' next_page=i %}">{{ i }}</a>
+            {% endif %}
+            </li>
+        {% endfor %}
+        {% if middle_range|length != 0 %}
+            </ul>
+            <span>&bull;&bull;&bull;</span>
+            <ul class="pagination">
+        {% endif %}
+        {% for i in middle_range %}
+            {% if i == current_page|add:"0" %}
+                <li class="active">
+                <a href="#">{{ i }}</a>
+            {% else %}
+                <li>
+                <a href="{% url 'next-pair-page' next_page=i %}">{{ i }}</a>
+            {% endif %}
+            </li>
+        {% endfor %}
+        {% if end_range|length %}
+            </ul>
+            <span>&bull;&bull;&bull;</span>
+            <ul class="pagination">
+        {% endif %}
+        {% for i in end_range %}
             {% if i == current_page|add:"0" %}
                 <li class="active">
                 <a href="#">{{ i }}</a>
