@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load replace_get_param %}
 {% block header %}
     <form method="POST" action="{% url 'next-pair-page' next_page=current_page  %}">
         {% csrf_token %}
@@ -20,8 +21,8 @@
             <div class="col-sm-6 col-md-3 pair is-not-pair">
         {% endif %}
                 <div class="row">
-                    <div class="col-sm-6 image-container"><img src="{{ pair.img_catalog_image }}"></div>
-                    <div class="col-sm-6 image-container"><img src="{{ pair.img_outdoor_image }}"></div>
+                    <div class="col-sm-6 image-container"><img src="{{ pair.img_catalog_image|replace_get_param }}"></div>
+                    <div class="col-sm-6 image-container"><img src="{{ pair.img_outdoor_image|replace_get_param }}"></div>
                 </div>
             </div>
         {% if forloop.counter|divisibleby:col_number %}
