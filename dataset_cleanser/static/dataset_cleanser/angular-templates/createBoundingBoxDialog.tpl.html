@@ -1,0 +1,35 @@
+<md-dialog aria-label="Detalle de la pareja" flex="80%" >
+    <div ng-cloak>
+        <md-toolbar md-autofocus>
+            <div class="md-toolbar-tools">
+                <h2>Detalle de la pareja</h2>
+                <span flex></span>
+                <md-button ng-click="dialogCtrl.close()">Cerrar</md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>Selección de prendas</h2>
+                <p>Envuelva las partes de las imágenes de manera que correspondan al mismo objeto</p>
+                <div layout="row" style="text-align: center">
+                    <span flex></span>
+                    <div layout="column" style="position: relative">
+                        <selector style="position: relative; z-index: 99999" location="left"></selector>
+                        <img class="modal-image" ng-src="{{ dialogCtrl.catalogImage }}">
+                    </div>
+                    <span flex></span>
+                    <div layout="column" >
+                        <selector style="position: relative; z-index: 99999" location="right"></selector>
+                        <img class="modal-image" ng-src="{{ dialogCtrl.outdoorImage }}">
+                    </div>
+                    <span flex></span>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button ng-click="dialogCtrl.save()">Guardar selección</md-button>
+            <md-button ng-click="dialogCtrl.close()">Cancelar</md-button>
+        </md-dialog-actions>
+    </div>
+</md-dialog>

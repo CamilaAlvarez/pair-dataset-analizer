@@ -7,25 +7,26 @@ from . import forms
 def get_paged_pairs(request, next_page):
     page_size = 16
     filter_form = forms.FilterForm()
+
+    def get_page_content(filter_container):
+        filter = request.POST['filter']
+        filter_form.initial = {'filter': filter}
+        if filter_container['filter'] != '-1':
+            page_content = ImagePairs.objects.filter(img_is_pair=filter)
+        else:
+            page_content = ImagePairs.objects.all()
+        return page_content
+
     if len(next_page) == 0:
         next_page = 1
     else:
         next_page = int(next_page)
     if 'filter' in request.POST:
-        filter = request.POST['filter']
-        request.session['filter'] = filter
-        filter_form.initial = {'filter':filter}
-        if request.POST['filter'] != '-1':
-            page_content = ImagePairs.objects.filter(img_is_pair=filter)
-        else:
-            page_content = ImagePairs.objects.all()
+        request.session['filter'] = request.POST['filter']
+        page_content = get_page_content(request.POST)
+
     elif 'filter' in request.session:
-        filter = request.session['filter']
-        filter_form.initial = {'filter': filter}
-        if request.session['filter'] != '-1':
-            page_content = ImagePairs.objects.filter(img_is_pair=filter)
-        else:
-            page_content = ImagePairs.objects.all()
+        page_content = get_page_content(request.session)
     else:
         page_content = ImagePairs.objects.all()
 

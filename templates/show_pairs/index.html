@@ -21,8 +21,8 @@
             <div class="col-sm-6 col-md-3 pair is-not-pair">
         {% endif %}
                 <div class="row">
-                    <div class="col-sm-6 image-container"><img src="{{ pair.img_catalog_image|replace_get_param }}"></div>
-                    <div class="col-sm-6 image-container"><img src="{{ pair.img_outdoor_image|replace_get_param }}"></div>
+                    <div class="col-sm-5 image-container"><img class="preview" src="{{ pair.img_catalog_image|replace_get_param }}"></div>
+                    <div class="col-sm-5 image-container"><img class="preview" src="{{ pair.img_outdoor_image|replace_get_param }}"></div>
                 </div>
             </div>
         {% if forloop.counter|divisibleby:col_number %}

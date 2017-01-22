@@ -1,0 +1,14 @@
+.button-container{
+    text-align: center;
+    padding: 0 10px;
+}
+.parent{
+    overflow: hidden; /*forces the browser the best it can to contain the child elements of the parent*/
+}
+
+.modal-image{
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+}

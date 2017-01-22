@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -23,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'qs8&+ni*w4lo@7j*1@c1rm5so+#5!64)+tsnst%p$1bvz(i1sz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.90']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'show_pairs',
+    'dataset_cleanser',
+    'djangobower',
+    'rest_framework',
+    'dataset_cleanser_rest'
 ]
 
 MIDDLEWARE = [
@@ -69,19 +72,33 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+]
+
+BOWER_COMPONENTS_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'bower_components'))
+
 WSGI_APPLICATION = 'dataset_pair_analizer.wsgi.application'
 
+BOWER_INSTALLED_APPS = (
+    'angular',
+    'angular-material',
+    'bootstrap',
+    'angular-utils-pagination',
+    'material-design-icons',
+
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-	'default':{'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'datasetAnalizer',
-		'USER':'labelingassistant',
-		'PASSWORD': 'PASS-99a050c0-d3ce-44e4-a581-6a7c4b609a08',
-		'HOST': 'localhost',
-		'PORT': '',}
+	'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
@@ -121,7 +138,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/dataset-analizer/static/'
+STATIC_URL = '/static/'
 MEDIA_ROOT = '/Users/calvarez/Downloads/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = '/home/calvarez/git/pair-dataset-analizer/collected-static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

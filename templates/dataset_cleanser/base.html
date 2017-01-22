@@ -8,9 +8,9 @@
     <title>Pairs</title>
     {% block head_script %}{% endblock head_script %}
 </head>
-<body>
-    <div class="panel panel-default">
-        <div class="panel-heading">
+<body ng-app="cleanDatasetApp">
+    <div class="panel panel-default" ng-controller="PairContainerCtrl as main" ng-show="main.loaded">
+        <div class="panel-heading parent">
             {% block header %}{% endblock header %}
         </div>
         <div class="panel-body">

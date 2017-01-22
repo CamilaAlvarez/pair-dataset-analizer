@@ -1,0 +1,49 @@
+.material-icons.md-36 {
+    font-size: 36px;
+    height: 36px;
+    width: 36px;
+    min-height: 36px;
+    min-width: 36px;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+}
+.material-icons.top-left{
+    top: -18px;
+    left: -18px;
+    cursor: nw-resize;
+}
+.material-icons.top-right{
+    top: -18px;
+    right: -18px;
+    cursor: ne-resize;
+}
+.material-icons.bottom-left{
+    bottom: -18px;
+    left: -18px;
+    cursor: sw-resize;
+}
+.material-icons.bottom-right{
+    bottom: -18px;
+    right: -18px;
+    cursor: se-resize;
+}
+.material-icons.border-icon{
+    color: #880000;
+    position: absolute;
+}
+.selector{
+    border-width: 5px;
+    border-style: dashed;
+    z-index: 10;
+    height: 100px;
+    width:100px;
+    position: absolute;
+    border-color: #880000;
+    cursor: crosshair;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+}

@@ -1,2 +1,4 @@
 Django>=1.9.5
+django-bower
+djangorestframework
 mysqlclient

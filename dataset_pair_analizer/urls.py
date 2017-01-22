@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^dataset/', include('show_pairs.urls')),
+    url(r'^cleanser/', include('dataset_cleanser.urls')),
+    url(r'^rest/', include('dataset_cleanser_rest.urls'))
 ]
 
 if settings.DEBUG:
