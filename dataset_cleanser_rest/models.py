@@ -8,6 +8,7 @@ class Pairs(models.Model):
     par_img_catalog = models.ForeignKey('PairImages', on_delete=models.CASCADE, related_name='catalog_images_pairs')
     par_img_outdoor = models.ForeignKey('PairImages', on_delete=models.CASCADE, related_name='outdoor_images_pairs')
     par_is_pair = models.BooleanField(default=True)
+    par_negative_pair = models.BooleanField(default=True)
 
 
 class PairImages(models.Model):
@@ -20,6 +21,7 @@ class PairImages(models.Model):
 class Images(models.Model):
     img_id = models.AutoField(primary_key=True)
     img_loc = models.CharField(default="", max_length=500)
+    img_is_catalog = models.BooleanField(default=True)
 
 
 class BoundingBoxes(models.Model):

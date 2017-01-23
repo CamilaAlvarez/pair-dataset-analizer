@@ -12,7 +12,7 @@ function dragable($compile){
         trueElem.setAttribute("ng-mousedown", "dragCtrl.mouseDown($event)");
         trueElem.setAttribute("ng-mousemove", "dragCtrl.mouseMove($event)");
         trueElem.setAttribute("ng-mouseup", "dragCtrl.mouseUp($event)");
-        trueElem.setAttribute("ng-mouseleave", "dragCtrl.mouseLeave($event)");
+        //trueElem.setAttribute("ng-mouseleave", "dragCtrl.mouseLeave($event)");
         if(angular.isDefined(attrs.notReady)){
             trueElem.removeAttribute('not-ready');
             $compile(trueElem)(scope);
@@ -42,21 +42,18 @@ function dragable($compile){
                 var newX = event.x;
                 var newY = event.y;
                 vm.border.setLocation(newX, newY);
-                vm.border.changeState();
                 touchService.setCornerTouch(true);
             };
             vm.mouseUp = function(event){
-                vm.border.changeState();
                 touchService.setCornerTouch(false);
             };
             vm.mouseLeave = function (event) {
                 if(vm.border.getState()) {
-                    vm.border.changeState();
                     touchService.setCornerTouch(false);
                 }
             };
             vm.mouseMove = function(event){
-                if(vm.border.getState()){
+                if(touchService.getCornerTouch()){
                     vm.border.alert($rootScope, event.x, event.y);
                 }
             };

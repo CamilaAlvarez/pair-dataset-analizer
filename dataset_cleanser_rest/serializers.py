@@ -57,11 +57,6 @@ class EvaluationSerializer(serializers.Serializer):
             image_pim_id = image['pim_id']
             if 'pim_bounding_box' not in image:
                 return
-            bounding_box = {}
-            bounding_box['x'] = image['pim_bounding_box']['bbx_x']
-            bounding_box['y'] = image['pim_bounding_box']['bbx_y']
-            bounding_box['width'] = image['pim_bounding_box']['bbx_width']
-            bounding_box['height'] = image['pim_bounding_box']['bbx_height']
 
             image_bbox = BoundingBoxesSerializers(data=image['pim_bounding_box'])
             if image_bbox.is_valid(raise_exception=True):

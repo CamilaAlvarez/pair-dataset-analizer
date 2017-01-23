@@ -4,13 +4,15 @@
 angular.module('cleanDatasetApp')
     .controller('BoundingBoxDialogCtrl', BoundingBoxDialogCtrl);
 
-BoundingBoxDialogCtrl.$inject = ['$rootScope', '$mdDialog', 'sharedImagesService','pair', 'catalogImage', 'outdoorImage'];
+BoundingBoxDialogCtrl.$inject = ['$rootScope', '$mdDialog', 'sharedImagesService','pair', 'catalogImage', 'outdoorImage',
+'touchService'];
 
-function BoundingBoxDialogCtrl($rootScope, $mdDialog, sharedImagesService, pair, catalogImage, outdoorImage){
+function BoundingBoxDialogCtrl($rootScope, $mdDialog, sharedImagesService, pair, catalogImage, outdoorImage, touchService){
     var vm = this;
     vm.pair = pair;
     var originalBBCatalog = pair.getCatalogImage().bounding_box;
     var originalBBOutdoor = pair.getOutdoorImage().bounding_box;
+
     sharedImagesService.setImage('left', pair.getCatalogImage());
     sharedImagesService.setImage('right', pair.getOutdoorImage());
     vm.catalogImage = catalogImage;
@@ -24,5 +26,12 @@ function BoundingBoxDialogCtrl($rootScope, $mdDialog, sharedImagesService, pair,
         vm.pair.changeState(true);
         $rootScope.$broadcast('change-state');
         $mdDialog.cancel();
+    };
+    vm.mouseUp = function(event){
+        touchService.unsetCurrentTouch();
+    };
+    vm.mouseMove = function(event){
+        if(touchService.getBodyTouch() || touchService.getCornerTouch())
+            $rootScope.$broadcast('mouse-move', {clickEvent: event});
     }
 }

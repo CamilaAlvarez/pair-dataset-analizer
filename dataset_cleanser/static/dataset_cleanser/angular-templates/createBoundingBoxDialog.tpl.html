@@ -15,7 +15,7 @@
                     <span flex></span>
                     <div layout="column" style="position: relative">
                         <selector style="position: relative; z-index: 99999" location="left"></selector>
-                        <img class="modal-image" ng-src="{{ dialogCtrl.catalogImage }}">
+                        <img class="modal-image" ng-mouseup="dialogCtrl.mouseUp($event)" ng-src="{{ dialogCtrl.catalogImage }}">
                     </div>
                     <span flex></span>
                     <div layout="column" >
