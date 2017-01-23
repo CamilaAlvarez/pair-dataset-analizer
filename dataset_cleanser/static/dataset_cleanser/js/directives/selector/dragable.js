@@ -12,7 +12,6 @@ function dragable($compile){
         trueElem.setAttribute("ng-mousedown", "dragCtrl.mouseDown($event)");
         trueElem.setAttribute("ng-mousemove", "dragCtrl.mouseMove($event)");
         trueElem.setAttribute("ng-mouseup", "dragCtrl.mouseUp($event)");
-        //trueElem.setAttribute("ng-mouseleave", "dragCtrl.mouseLeave($event)");
         if(angular.isDefined(attrs.notReady)){
             trueElem.removeAttribute('not-ready');
             $compile(trueElem)(scope);
@@ -57,6 +56,9 @@ function dragable($compile){
                     vm.border.alert($rootScope, event.x, event.y);
                 }
             };
+            $(this).on('mouse-move', function (event, clickEvent) {
+                vm.mouseMove(clickEvent);
+            });
         }] ,
         controllerAs: 'dragCtrl',
         link: link

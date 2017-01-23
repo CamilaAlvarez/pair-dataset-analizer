@@ -25,6 +25,8 @@ function adaptableSize($compile) {
                 touchService.setBodyTouch(true);
             };
             vm.mouseUp = function(event){
+                if(touchService.getCornerTouch())
+                    touchService.setCornerTouch(false);
                 touchService.setBodyTouch(false);
             };
             vm.mouseLeave = function (event){
@@ -56,9 +58,9 @@ function adaptableSize($compile) {
             };
             elem.attr("ng-mousedown","rectangleCtrl.mouseDown($event)");
             elem.attr('ng-mouseup',"rectangleCtrl.mouseUp($event)");
-            //elem.attr('ng-mouseleave',"rectangleCtrl.mouseLeave($event)");
             elem.attr('ng-mousemove',"rectangleCtrl.mouseMove($event)");
-            changeDisposition(elem,controller.image.bounding_box);
+            if(angular.isDefined(controller.image.bounding_box) && controller.image.bounding_box.bbx_active)
+                changeDisposition(elem,controller.image.bounding_box);
 
             if(angular.isDefined(attrs.notReady)){
                 elem.removeAttr('not-ready');

@@ -28,20 +28,7 @@ function selector(){
         controllerAs: 'selectorCtrl',
         link: function (scope, elem, attrs, controller) {
             function checkConditions(newWidth, newHeight, newX, newY, currentLocation){
-                if(newWidth < 36){
-                    newWidth = 36;
-                    newX = currentLocation.bbx_x;
-                }
-                if(newHeight < 36){
-                    newHeight = 36;
-                    newY = currentLocation.bbx_y;
-                }
-                if(newX <= 0 ){
-                    newX = 0;
-                }
-                if(newY <= 0){
-                    newY = 0;
-                }
+                var minDimension = 50;
                 var width = getImageWidth(elem);
                 if(newX+newWidth >= width){
                     newWidth = width - newX;
@@ -49,6 +36,22 @@ function selector(){
                 var height = getImageHeight(elem);
                 if(newY+newHeight >= height){
                     newHeight = height - newY;
+                }
+                if(newWidth < minDimension){
+                    newWidth = minDimension;
+                    newX = currentLocation.bbx_x;
+                }
+                if(newHeight < minDimension){
+                    newHeight = minDimension;
+                    newY = currentLocation.bbx_y;
+                }
+                if(newX <= 0 ){
+                    newX = 0;
+                    newWidth = currentLocation.bbx_width;
+                }
+                if(newY <= 0){
+                    newY = 0;
+                    newHeight = currentLocation.bbx_height;
                 }
                 controller.selector.updateSelector(newX, newY, newWidth, newHeight);
                 controller.notifyChange();

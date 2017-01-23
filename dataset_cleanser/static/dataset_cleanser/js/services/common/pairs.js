@@ -17,8 +17,14 @@ angular
                     var data_pairs = data.pairs;
                     for (i in data_pairs){
                         var pair = data_pairs[i];
+                        var modifyCatalog = true;
+                        var modifyOutdoor = true;
+                        if(pair.catalog_image.bounding_box != undefined)
+                                modifyCatalog = pair.catalog_image.bounding_box.bbx_active;
+                        if(pair.outdoor_image.bounding_box != undefined)
+                                modifyOutdoor = pair.outdoor_image.bounding_box.bbx_active;
                         pairs.push(new Pair(pair.id, pair.catalog_image,
-                            pair.outdoor_image, pair.is_pair));
+                            pair.outdoor_image, pair.is_pair, modifyCatalog, modifyOutdoor));
                     }
                     return true;
                 })

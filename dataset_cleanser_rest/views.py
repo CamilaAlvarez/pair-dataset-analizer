@@ -9,7 +9,7 @@ import rest_framework.status as status
 
 @api_view(['GET', 'POST'])
 def get_next_page(request):
-    pairs = Pairs.objects.filter()
+    pairs = Pairs.objects.filter(par_negative_pair=False)
     paginator = CustomPaginator()
     page = paginator.paginate_queryset(pairs, request)
     serialized_page = PairsSerializers(page, many=True)

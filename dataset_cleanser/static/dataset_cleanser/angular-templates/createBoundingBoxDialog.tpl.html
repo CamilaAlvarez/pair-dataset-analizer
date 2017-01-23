@@ -8,18 +8,22 @@
             </div>
         </md-toolbar>
         <md-dialog-content>
-            <div class="md-dialog-content">
+            <div class="md-dialog-content"  ng-mouseup="dialogCtrl.mouseUp($event)">
                 <h2>Selección de prendas</h2>
                 <p>Envuelva las partes de las imágenes de manera que correspondan al mismo objeto</p>
+
                 <div layout="row" style="text-align: center">
                     <span flex></span>
                     <div layout="column" style="position: relative">
-                        <selector style="position: relative; z-index: 99999" location="left"></selector>
-                        <img class="modal-image" ng-mouseup="dialogCtrl.mouseUp($event)" ng-src="{{ dialogCtrl.catalogImage }}">
+                        <md-checkbox ng-model="dialogCtrl.modifyCatalog" style>Hay que marcar esta imagen</md-checkbox>
+                        <selector style="position: relative; z-index: 99999" location="left" ng-show="dialogCtrl.modifyCatalog"></selector>
+                        <img class="modal-image" ng-src="{{ dialogCtrl.catalogImage }}">
+
                     </div>
                     <span flex></span>
                     <div layout="column" >
-                        <selector style="position: relative; z-index: 99999" location="right"></selector>
+                         <md-checkbox ng-model="dialogCtrl.modifyOutdoor" style>Hay que marcar esta imagen</md-checkbox>
+                        <selector style="position: relative; z-index: 99999" location="right" ng-show="dialogCtrl.modifyOutdoor"></selector>
                         <img class="modal-image" ng-src="{{ dialogCtrl.outdoorImage }}">
                     </div>
                     <span flex></span>

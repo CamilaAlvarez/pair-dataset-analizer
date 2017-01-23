@@ -18,7 +18,7 @@ class BoundingBoxesSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = models.BoundingBoxes
-        fields = ('bbx_x', 'bbx_y', 'bbx_height', 'bbx_width')
+        fields = ('bbx_x', 'bbx_y', 'bbx_height', 'bbx_width', 'bbx_active')
 
 
 
@@ -55,17 +55,31 @@ class EvaluationSerializer(serializers.Serializer):
     def create(self, validated_data):
         def add_bounding_box(image):
             image_pim_id = image['pim_id']
+            try:
+                image_pair = models.PairImages.objects.get(pk=image_pim_id)
+            except models.PairImages.DoesNotExist:
+                raise Exception
             if 'pim_bounding_box' not in image:
+                if image_pair.pim_bounding_box is not None:
+                    bbox = image_pair.pim_bounding_box
+                    image_pair.pim_bounding_box = None
+                    bbox.bbx_active = False
+                    bbox.save()
                 return
 
+            if image_pair.pim_bounding_box is not None:
+                bbox = image_pair.pim_bounding_box
+                bbox_json = image['pim_bounding_box']
+                bbox.bbx_x = bbox_json['bbx_x']
+                bbox.bbx_y = bbox_json['bbx_y']
+                bbox.bbx_width = bbox_json['bbx_width']
+                bbox.bbx_height = bbox_json['bbx_height']
+                bbox.bbx_active = True
+                bbox.save()
+                return
             image_bbox = BoundingBoxesSerializers(data=image['pim_bounding_box'])
             if image_bbox.is_valid(raise_exception=True):
                 bbox = image_bbox.create(image_bbox.validated_data)
-                try:
-                    image_pair = models.PairImages.objects.get(pk=image_pim_id)
-                except models.PairImages.DoesNotExist:
-                    raise Exception
-
                 image_pair.pim_bounding_box = bbox
                 image_pair.save()
 

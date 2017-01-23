@@ -3,18 +3,20 @@
  */
 
 
-function Pair(pairId, pairCatalogImage, pairOutdoorImage, is_pair){
+function Pair(pairId, pairCatalogImage, pairOutdoorImage, is_pair, modifyCatalog, modifyOutdoor){
     var pair = this;
     this.state = is_pair;
     var id = pairId;
     var catalogImage = pairCatalogImage;
     var outdoorImage = pairOutdoorImage;
+    this.modifyCatalog = modifyCatalog;
+    this.modifyOutdoor = modifyOutdoor;
 
     this.getId = function () {
        return id;
     };
     this.getCatalogImage = function () {
-        if (catalogImage.bounding_box == null){
+        if (catalogImage.bounding_box == null || !pair.modifyCatalog){
             var auxiliarImage = catalogImage;
             auxiliarImage.bounding_box = undefined;
             return auxiliarImage;
@@ -25,7 +27,7 @@ function Pair(pairId, pairCatalogImage, pairOutdoorImage, is_pair){
         return catalogImage.image.image_location;
     };
     this.getOutdoorImage = function () {
-        if (outdoorImage.bounding_box == null){
+        if (outdoorImage.bounding_box == null || !pair.modifyOutdoor){
             var auxiliarImage = outdoorImage;
             auxiliarImage.bounding_box = undefined;
             return auxiliarImage;

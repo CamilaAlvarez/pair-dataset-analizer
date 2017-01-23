@@ -1,32 +1,34 @@
 .material-icons.md-36 {
     font-size: 36px;
-    height: 36px;
-    width: 36px;
-    min-height: 36px;
-    min-width: 36px;
+    height: 50px;
+    width: 50px;
+    min-height: 50px;
+    min-width: 50px;
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;
+    vertical-align: bottom;
+    line-height: 43px;
 }
 .material-icons.top-left{
-    top: -18px;
-    left: -18px;
+    top: -30px;
+    left: -30px;
     cursor: nw-resize;
 }
 .material-icons.top-right{
-    top: -18px;
-    right: -18px;
+    top: -30px;
+    right: -30px;
     cursor: ne-resize;
 }
 .material-icons.bottom-left{
-    bottom: -18px;
-    left: -18px;
+    bottom: -30px;
+    left: -30px;
     cursor: sw-resize;
 }
 .material-icons.bottom-right{
-    bottom: -18px;
-    right: -18px;
+    bottom: -30px;
+    right: -30px;
     cursor: se-resize;
 }
 .material-icons.border-icon{

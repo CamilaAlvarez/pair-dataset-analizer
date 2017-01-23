@@ -14,7 +14,7 @@ class Pairs(models.Model):
 class PairImages(models.Model):
     pim_id = models.AutoField(primary_key=True)
     pim_image = models.ForeignKey('Images', on_delete=models.CASCADE, related_name='pair_images')
-    pim_bounding_box = models.ForeignKey('BoundingBoxes', on_delete=models.CASCADE,
+    pim_bounding_box = models.ForeignKey('BoundingBoxes',
                                          related_name='bounding_box', blank=True, null=True)
 
 
@@ -30,5 +30,6 @@ class BoundingBoxes(models.Model):
     bbx_y = models.FloatField(default=0)
     bbx_height = models.FloatField(default=0)
     bbx_width = models.FloatField(default=0)
+    bbx_active = models.BooleanField(default=True)
 
 

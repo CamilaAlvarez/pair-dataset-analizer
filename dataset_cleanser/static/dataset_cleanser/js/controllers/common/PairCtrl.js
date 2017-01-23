@@ -34,7 +34,7 @@ function PairCtrl($scope, pairs, $mdDialog) {
             fullscreen: true
         }).then(function (boundingBoxes) {
 
-        }, function () {
+        }, function (e) {
             console.log("Closed Dialog");
         })
     };
