@@ -18,8 +18,8 @@ angular
                     var data_pairs = data.pairs;
                     for (i in data_pairs){
                         var pair = data_pairs[i];
-                        var modifyCatalog = true;
-                        var modifyOutdoor = true;
+                        var modifyCatalog = false;
+                        var modifyOutdoor = false;
                         if(pair.catalog_image.bounding_box != undefined)
                                 modifyCatalog = pair.catalog_image.bounding_box.bbx_active;
                         if(pair.outdoor_image.bounding_box != undefined)
