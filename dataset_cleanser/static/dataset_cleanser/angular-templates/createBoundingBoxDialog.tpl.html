@@ -14,14 +14,14 @@
 
                 <div layout="row" style="text-align: center">
                     <span flex></span>
-                    <div layout="column" style="position: relative">
+                    <div layout="column" style="position: relative" layout-align="center center">
                         <md-checkbox ng-model="dialogCtrl.modifyCatalog" style>Hay que marcar esta imagen</md-checkbox>
                         <selector style="position: relative; z-index: 99999" location="left" ng-show="dialogCtrl.modifyCatalog"></selector>
                         <img class="modal-image" ng-src="{{ dialogCtrl.catalogImage }}">
 
                     </div>
                     <span flex></span>
-                    <div layout="column" >
+                    <div layout="column" style="position: relative" layout-align="center center" >
                          <md-checkbox ng-model="dialogCtrl.modifyOutdoor" style>Hay que marcar esta imagen</md-checkbox>
                         <selector style="position: relative; z-index: 99999" location="right" ng-show="dialogCtrl.modifyOutdoor"></selector>
                         <img class="modal-image" ng-src="{{ dialogCtrl.outdoorImage }}">
