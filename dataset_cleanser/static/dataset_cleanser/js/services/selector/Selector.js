@@ -26,7 +26,7 @@ function Selector() {
     }
     return {
         getSelector: function () {
-            return new Selector(100,100,100,100);
+            return new Selector(0,0,100,100);
         }
     }
 }
