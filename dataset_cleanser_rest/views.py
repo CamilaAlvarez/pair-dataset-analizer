@@ -5,6 +5,7 @@ from dataset_cleanser_rest.paginator import CustomPaginator
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 import rest_framework.status as status
+import time
 
 
 @api_view(['GET', 'POST'])

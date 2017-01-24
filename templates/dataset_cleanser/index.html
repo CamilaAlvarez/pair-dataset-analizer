@@ -3,7 +3,7 @@
 
 {% block head_script %}
     <script type="text/javascript" src="{% static "angular/angular.js" %}"></script>
-    <script type="text/javascript" src="{% static "angular-material/angular-material.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "angular-material/angular-material.js" %}"></script>
     <script type="text/javascript" src="{% static "angularUtils-pagination/dirPagination.js" %}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -47,7 +47,7 @@
 
 
 {% block footer %}
-    <dir-pagination-controls on-page-change="main.changePage()" boundary-links="true" template-url="{% url 'pagination' %}"></dir-pagination-controls>
+    <dir-pagination-controls max-size="20" on-page-change="main.changePage()" boundary-links="true" template-url="{% url 'pagination' %}"></dir-pagination-controls>
 {% endblock footer %}
 
 {% block scripts %}
@@ -61,6 +61,7 @@
     <script type="text/javascript" src="{% static "dataset_cleanser/js/app.js" %}"></script>
     <script type="text/javascript" src="{% static "dataset_cleanser/js/services/common/Pair.js" %}"></script>
     <script type="text/javascript" src="{% static "dataset_cleanser/js/services/common/pairs.js" %}"></script>
+    <script type="text/javascript" src="{% static "dataset_cleanser/js/services/common/requestState.js" %}"></script>
     <script type="text/javascript" src="{% static "dataset_cleanser/js/services/selector/DragableBorder.js" %}"></script>
     <script type="text/javascript" src="{% static "dataset_cleanser/js/services/selector/Selector.js" %}"></script>
     <script type="text/javascript" src="{% static "dataset_cleanser/js/services/selector/touchService.js" %}"></script>

@@ -44,6 +44,6 @@ function Pair(pairId, pairCatalogImage, pairOutdoorImage, is_pair, modifyCatalog
 
 angular
     .module('cleanDatasetApp')
-    .factory('Pair', ['$http', function ($http) {
+    .factory('Pair',  function () {
         return Pair;
-    }]);
+    });

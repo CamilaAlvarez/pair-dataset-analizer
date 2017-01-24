@@ -6,19 +6,21 @@ angular
     .module('cleanDatasetApp')
     .controller('PairContainerCtrl', PairContainerCtrl);
 
-PairContainerCtrl.$inject = ['$scope', 'pairs', '$mdDialog', 'touchService'];
-function PairContainerCtrl($scope, pairs, $mdDialog, touchService) {
+PairContainerCtrl.$inject = ['$scope', 'pairs', '$mdDialog', 'requestState'];
+function PairContainerCtrl($scope, pairs, $mdDialog, requestState) {
     var vm = this;
     vm.loaded = false;
     pairs.loadPairs(1).then(function(valid) {
+        requestState.setLoaded();
         if(valid){
             vm.totalPairs = pairs.getTotalPairNumber();
             vm.pairs = pairs.getPairs();
             vm.loaded = true;
         }
     });
+    vm.state = requestState.getState;
     vm.oldPageNumber = 1;
-    vm.pairsPerPage = 1;
+    vm.pairsPerPage = 16;
     vm.rollback = false;
     vm.save = function () {
         pairs.updatePairs().then(function(response){
@@ -27,6 +29,7 @@ function PairContainerCtrl($scope, pairs, $mdDialog, touchService) {
                 data = response.data;
             var status = data['status'];
             var alert;
+            requestState.setLoaded();
             if(angular.isDefined(status) && status == '1'){
                 alert = $mdDialog.alert({
                     title: 'Error',
@@ -60,6 +63,7 @@ function PairContainerCtrl($scope, pairs, $mdDialog, touchService) {
                 data = response.data;
             var status = data['status'];
             var alert;
+            requestState.setLoaded();
             if(angular.isDefined(status) && status == '1'){
                 alert = $mdDialog.alert({
                     title: 'Error',
@@ -77,6 +81,7 @@ function PairContainerCtrl($scope, pairs, $mdDialog, touchService) {
             }
             else{
                 pairs.loadPairs(vm.pagination.current).then(function(valid) {
+                    requestState.setLoaded();
                     if(valid){
                         vm.totalPairs = pairs.getTotalPairNumber();
                         vm.pairs = pairs.getPairs();

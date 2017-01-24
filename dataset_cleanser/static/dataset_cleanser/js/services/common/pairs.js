@@ -4,11 +4,12 @@
 
 angular
     .module('cleanDatasetApp')
-    .factory('pairs', ['Pair','$http', function(Pair, $http){
+    .factory('pairs', ['Pair','$http', 'requestState', function(Pair, $http, requestState){
         var pairs = [];
         var totalPairs = 0;
         var loadPairs = function (page) {
             var loadPairsUrls = "/rest/page/";
+            requestState.setLoading();
             return $http.get(loadPairsUrls, {params:{page: page}})
                 .then(function(response){
                     pairs = [];
@@ -53,7 +54,7 @@ angular
                 };
                 pairs_data.push(data);
             }
-
+            requestState.setLoading();
             return $http.post(changeStateUrl, JSON.stringify(pairs_data))
                 .then(function(response){
                     return response.data
