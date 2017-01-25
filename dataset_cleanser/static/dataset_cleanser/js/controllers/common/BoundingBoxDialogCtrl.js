@@ -11,24 +11,26 @@ function BoundingBoxDialogCtrl($rootScope, $mdDialog, sharedImagesService, pair,
     var vm = this;
     vm.pair = pair;
     
-    var originalBBCatalog = pair.getCatalogImage().bounding_box;
-    var originalBBOutdoor = pair.getOutdoorImage().bounding_box;
+    var originalBBCatalog = pair.catalogImage.bounding_box;
+    var originalBBOutdoor = pair.outdoorImage.bounding_box;
 
-    sharedImagesService.setImage('left', pair.getCatalogImage());
-    sharedImagesService.setImage('right', pair.getOutdoorImage());
+    sharedImagesService.setImage('left', pair.catalogImage);
+    sharedImagesService.setImage('right', pair.outdoorImage);
     vm.catalogImage = catalogImage;
     vm.outdoorImage = outdoorImage;
     vm.modifyCatalog = vm.pair.modifyCatalog;
     vm.modifyOutdoor = vm.pair.modifyOutdoor;
     vm.close = function () {
-        vm.pair.getCatalogImage().bounding_box = originalBBCatalog;
-        vm.pair.getOutdoorImage().bounding_box = originalBBOutdoor;
+        vm.pair.setBBoxCatalog(originalBBCatalog);
+        vm.pair.setBBoxOutdoor(originalBBOutdoor);
         $mdDialog.cancel();
     };
     vm.save = function(){
         vm.pair.changeState(true);
         vm.pair.modifyCatalog = vm.modifyCatalog;
         vm.pair.modifyOutdoor = vm.modifyOutdoor;
+        vm.pair.setBBoxCatalog(sharedImagesService.getImage('left').bounding_box);
+        vm.pair.setBBoxOutdoor(sharedImagesService.getImage('right').bounding_box);
         $rootScope.$broadcast('change-state');
         $mdDialog.cancel();
     };

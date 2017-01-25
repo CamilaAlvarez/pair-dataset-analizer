@@ -19,9 +19,11 @@ function selector(){
             vm.selector = Selector.getSelector();
             vm.location = $scope.location;
             vm.image = sharedImagesService.getImage(vm.location);
+
             vm.notifyChange = function(){
                 $rootScope.$broadcast('updated-selector-'+vm.location, vm.selector.getLocation());
-                vm.image['bounding_box'] = vm.selector.getLocation();
+                sharedImagesService.getImage(vm.location).bounding_box = vm.selector.getLocation();
+                sharedImagesService.getImage(vm.location).bounding_box.bbx_active = true;
             };
 
         }],
@@ -45,11 +47,11 @@ function selector(){
                     newHeight = minDimension;
                     newY = currentLocation.bbx_y;
                 }
-                if(newX <= 0 ){
+                if(newX < 0 ){
                     newX = 0;
                     newWidth = currentLocation.bbx_width;
                 }
-                if(newY <= 0){
+                if(newY < 0){
                     newY = 0;
                     newHeight = currentLocation.bbx_height;
                 }

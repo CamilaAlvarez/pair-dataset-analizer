@@ -15,11 +15,12 @@ function Selector() {
             bbx_x: x,
             bbx_y: y,
             bbx_height: height,
-            bbx_width: width
+            bbx_width: width,
+            bbx_active: true
         };
         
         obj.updateSelector = function(x,y, width, height){
-            location = {bbx_x: x, bbx_y:y, bbx_width: width, bbx_height:height}
+            location = {bbx_x: x, bbx_y:y, bbx_width: width, bbx_height:height, bbx_active:true}
         };
 
         obj.getLocation = function(){return location};

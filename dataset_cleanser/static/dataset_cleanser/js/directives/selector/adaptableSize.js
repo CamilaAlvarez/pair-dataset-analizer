@@ -59,8 +59,10 @@ function adaptableSize($compile) {
             elem.attr("ng-mousedown","rectangleCtrl.mouseDown($event)");
             elem.attr('ng-mouseup',"rectangleCtrl.mouseUp($event)");
             elem.attr('ng-mousemove',"rectangleCtrl.mouseMove($event)");
-            if(angular.isDefined(controller.image.bounding_box) && controller.image.bounding_box.bbx_active)
-                changeDisposition(elem,controller.image.bounding_box);
+            if(angular.isDefined(controller.image.bounding_box) &&  controller.image.bounding_box != null &&
+                controller.image.bounding_box.bbx_active) {
+                changeDisposition(elem, controller.image.bounding_box);
+            }
 
             if(angular.isDefined(attrs.notReady)){
                 elem.removeAttr('not-ready');

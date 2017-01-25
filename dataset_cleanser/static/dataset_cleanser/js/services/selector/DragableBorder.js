@@ -6,26 +6,26 @@ angular.module('cleanDatasetApp')
     .factory('DragableBorder', function () {
         var location = {x:0, y:0};
         function DragableBorder(location_in_view){
-
+            var drag = this;
             var started = false;
             var dispositon = location_in_view;
 
-            this.changeState = function () {
+            drag.changeState = function () {
                 started = !started
             };
-            this.getLocation = function () {
+            drag.getLocation = function () {
                 return location;
             };
-            this.setLocation = function (x, y) {
+            drag.setLocation = function (x, y) {
                 location = {x:x, y:y}
             };
-            this.getState = function () {
+            drag.getState = function () {
                 return started;
             };
-            this.sendAlert = function(text, scope, x, y){
+            drag.sendAlert = function(text, scope, x, y){
                 var moveX = x-location.x;
                 var moveY = y-location.y;
-                this.setLocation(x,y);
+                drag.setLocation(x,y);
                 return scope.$broadcast(text+'-'+dispositon, {moveX:moveX, moveY: moveY});
             }
         }

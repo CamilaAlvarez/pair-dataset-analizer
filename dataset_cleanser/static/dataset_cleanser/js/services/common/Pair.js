@@ -5,40 +5,50 @@
 
 function Pair(pairId, pairCatalogImage, pairOutdoorImage, is_pair, modifyCatalog, modifyOutdoor){
     var pair = this;
-    this.state = is_pair;
+    pair.state = is_pair;
     var id = pairId;
-    var catalogImage = pairCatalogImage;
-    var outdoorImage = pairOutdoorImage;
-    this.modifyCatalog = modifyCatalog;
-    this.modifyOutdoor = modifyOutdoor;
+    pair.catalogImage = pairCatalogImage;
+    pair.outdoorImage = pairOutdoorImage;
+    pair.modifyCatalog = modifyCatalog;
+    pair.modifyOutdoor = modifyOutdoor;
 
-    this.getId = function () {
+    pair.getId = function () {
        return id;
     };
-    this.getCatalogImage = function () {
-        if (catalogImage.bounding_box == null || !pair.modifyCatalog){
-            var auxiliarImage = catalogImage;
+    pair.getCatalogImage = function () {
+        console.log(pair.modifyCatalog)
+        if (pair.catalogImage.bounding_box == null || !pair.modifyCatalog){
+            var auxiliarImage = pair.catalogImage;
             auxiliarImage.bounding_box = undefined;
             return auxiliarImage;
         }
-        return catalogImage;
+        return pair.catalogImage;
     };
-    this.getCatalogImageSrc = function () {
-        return catalogImage.image.image_location;
+    pair.getCatalogImageSrc = function () {
+        return pair.catalogImage.image.image_location;
     };
-    this.getOutdoorImage = function () {
-        if (outdoorImage.bounding_box == null || !pair.modifyOutdoor){
-            var auxiliarImage = outdoorImage;
+    pair.getOutdoorImage = function () {
+        if (pair.outdoorImage.bounding_box == null || !pair.modifyOutdoor){
+            var auxiliarImage = pair.outdoorImage;
             auxiliarImage.bounding_box = undefined;
             return auxiliarImage;
         }
-        return outdoorImage;
+        return pair.outdoorImage;
     };
-    this.getOutdoorImageSrc = function () {
-        return outdoorImage.image.image_location;
+    pair.getOutdoorImageSrc = function () {
+        return pair.outdoorImage.image.image_location;
     };
-    this.changeState = function (new_state) {
+    pair.changeState = function (new_state) {
         pair.state = new_state
+    };
+
+    pair.setBBoxCatalog = function (bbox) {
+        if(pair.modifyCatalog)
+            pair.catalogImage.bounding_box = bbox;
+    };
+    pair.setBBoxOutdoor = function (bbox) {
+        if(pair.modifyOutdoor)
+            pair.outdoorImage.bounding_box = bbox;
     };
 }
 

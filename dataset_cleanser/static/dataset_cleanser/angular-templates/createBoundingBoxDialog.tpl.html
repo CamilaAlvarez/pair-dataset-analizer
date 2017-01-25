@@ -16,7 +16,7 @@
                     <span flex></span>
                     <div layout="column">
                         <div>
-                            <md-checkbox layout-align="center center" ng-model="dialogCtrl.modifyCatalog" style>Hay que marcar esta imagen</md-checkbox>
+                            <md-checkbox class="not-selectable" layout-align="center center" ng-model="dialogCtrl.modifyCatalog" style>Hay que marcar esta imagen</md-checkbox>
                         </div>
                         <selector style="position: relative; z-index: 99999" location="left" ng-show="dialogCtrl.modifyCatalog"></selector>
                         <img class="modal-image" ng-src="{{ dialogCtrl.catalogImage }}">

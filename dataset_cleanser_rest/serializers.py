@@ -80,6 +80,8 @@ class EvaluationSerializer(serializers.Serializer):
             image_bbox = BoundingBoxesSerializers(data=image['pim_bounding_box'])
             if image_bbox.is_valid(raise_exception=True):
                 bbox = image_bbox.create(image_bbox.validated_data)
+                bbox.bbx_active = True
+                bbox.save()
                 image_pair.pim_bounding_box = bbox
                 image_pair.save()
 
